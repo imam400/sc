@@ -1,0 +1,116 @@
+
+base = 0.001
+
+nextbet = base
+
+chance = 5
+
+wincount = 0
+
+losecount = 0
+
+target = balance*1000
+
+bethigh = false
+
+w = 0
+
+i = balance*0.998
+
+k = 3000000000
+
+roll=0
+
+function dobet()
+
+roll+=1
+
+if balance > target then
+
+ stop() end
+
+if w==16 then
+
+        resetseed()
+
+        bethigh = !bethigh
+
+        w = 0
+
+end
+
+
+if win then
+
+        w+=1
+
+        wincount+=1
+
+        nextbet = base
+
+        chance = 5
+
+        losecount = 0
+
+ else
+
+        wincount = 0
+
+        losecount+=1
+
+        nextbet = previousbet*1.08
+
+end
+
+ if roll>=16 and i>k then
+
+resetseed()
+
+withdraw(i,"xxxxxx")
+
+print(" ") print("target: "..target)
+
+print("nextbet: "..nextbet)
+
+print("chance: "..chance)
+
+print("Profit to go: "..target - balance)
+
+print(" ")
+
+end
+
+
+end
+
+
+if wincount==2 then
+
+        wincount = 0
+
+        nextbet = previousbet*1.08
+
+        chance = 5
+
+end
+
+if losecount >= 10 then
+
+    chance = 5
+
+end
+
+print(" ")
+
+print("Wincount: "..wincount)
+
+print("losecount: "..losecount)
+
+print(" ")
+
+end
+
+end
+
+end
+
